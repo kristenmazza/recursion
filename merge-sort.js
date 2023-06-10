@@ -1,26 +1,23 @@
 #!/usr/bin/node
 
-function mergeSort(
-  arr,
-  start = 1,
-  end = arr.length,
-  sortedArr = [],
-  i = 0,
-  j = 0,
-  k = 0
-) {
+function mergeSort(arr) {
   if (arr.length <= 1) return arr;
 
   mid = Math.floor(arr.length / 2);
 
-  let firstHalf = arr.slice(start - 1, mid);
-  let secondHalf = arr.slice(mid + start - 1, end);
-
-  console.log("unsortedArr " + arr);
+  let firstHalf = arr.slice(0, mid);
+  let secondHalf = arr.slice(mid, arr.length);
 
   const firstHalfSorted = mergeSort(firstHalf);
   const secondHalfSorted = mergeSort(secondHalf);
 
+  let i = 0,
+    j = 0,
+    k = 0;
+
+  let sortedArr = [];
+
+  // Sort by comparing values in first half to values in second half
   while (i < firstHalfSorted.length && j < secondHalfSorted.length) {
     if (firstHalfSorted[i] < secondHalfSorted[j]) {
       sortedArr[k++] = firstHalfSorted[i++];
@@ -29,6 +26,7 @@ function mergeSort(
     }
   }
 
+  // If any values remain, move those values into the sorted array
   for (; i < firstHalfSorted.length; i++) {
     sortedArr[k++] = firstHalfSorted[i];
   }
@@ -37,10 +35,8 @@ function mergeSort(
     sortedArr[k++] = secondHalfSorted[j];
   }
 
-  console.log("sortedArr " + sortedArr);
-
   return sortedArr;
 }
 
-array = [3, 1, 124, 43, 434];
+array = [3, 1, -1, 393, 0, 42];
 console.log(mergeSort(array));
