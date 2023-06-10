@@ -11,6 +11,10 @@ function mergeSort(arr) {
   const firstHalfSorted = mergeSort(firstHalf);
   const secondHalfSorted = mergeSort(secondHalf);
 
+  return merge(firstHalfSorted, secondHalfSorted);
+}
+
+function merge(firstHalfSorted, secondHalfSorted) {
   let i = 0,
     j = 0,
     k = 0;
